@@ -6,9 +6,15 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,800,300,600,700);
 @import url(http://fonts.googleapis.com/css?family=Abel);
 
+span.text-alert{
+  color: red;
+  font-style: 17px;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+}
 body {
   font-family: 'Roboto', sans-serif;
-  background:;
   position: relative;
   font-weight:400px;
 }
@@ -899,7 +905,7 @@ h2.title {
   transition: height 500ms ease 0s;
   width: 100%;
   display: block;
-  opacity:;
+  opacity:0;
 }
 
 .single-products:hover .product-overlay {

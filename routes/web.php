@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,14 +13,19 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+//Frontend
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', [HomeController::class,'index']);
+Route::get('/home', [HomeController::class,'index']);
 
-Route::get('/', function () {
-    return view('welcome');
+
+//Backend
+Route::get('/admin',[AdminController::class,'index']);
+Route::get('/dashboard',[AdminController::class,'show_dashboard']);
+Route::get('/',function(){
+  return response()->json(['stuff'=>phpinfo()]);
 });
-Route::get(
-    '/', 'HomeController@index'
-);
-Route::get(
-    '/trang-chu', 'HomeController@index'
-);
-
+Route::post('/admin-dashboard','AdminController@dashboard');
+Route::get('/logout','AdminController@logout');
