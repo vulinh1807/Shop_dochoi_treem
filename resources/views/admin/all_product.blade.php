@@ -62,7 +62,7 @@
             <td><img src="public/uploads/product/{{$pro -> product_image}}" height="100" width="100"></td>
             <td>{{$pro -> category_name}}</td>
             <td>{{$pro -> brand_name}}</td>
-            <th>{{$pro -> product_description}}</th>
+            <th>{{$pro -> product_desc}}</th>
             <td><span class="text-ellipsis">
               <?php
               if($pro->product_status==0)
@@ -81,12 +81,12 @@
               ?>
               </span></td>
             <td>
-              <a href="{{URL::to('/edit-product/'.$pro->product_id)}}" class="active styling-edit" ui-toggle-class="">
-                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-              </a>
-                <a href="{{URL::to('/delete-product/'.$pro->product_id)}}" onclick="return confirm('do you still wanna delete?')" class="active styling-edit" ul-toggle-class="" href="{{URL::to('/delete-product/'.$pro->product_id)}}"></a>
-                <i class="fa fa-times text-danger text" aria-hidden="true"></i>
-              </a>
+                <a href="{{URL::to('/edit-product/'.$pro->product_id)}}" class="active styling-edit" ui-toggle-class="">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </a>
+                  <a href="{{URL::to('/delete-product/'.$pro->product_id)}}" onclick="return confirm('do you still wanna delete?')" class="active styling-edit" ul-toggle-class="">
+                  <i class="fa fa-times text-danger text"></i>
+                </a>
               </td>
           </tr>
           @endforeach 

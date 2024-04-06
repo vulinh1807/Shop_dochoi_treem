@@ -26,11 +26,11 @@ Route::get('/home', [HomeController::class,'index']);
 
 //Backend
 Route::get('/admin',[AdminController::class,'index']);
-//Route::get('/dashboard',[AdminController::class,'show_dashboard']);
+Route::get('/dashboard',[AdminController::class,'show_dashboard']);
 // Route::get('/',function(){
 //   return response()->json(['stuff'=>phpinfo()]);
 // });
-Route::get('/admin-dashboard',[AdminController::class,'show_dashboard']);
+Route::get('/admin-dashboard',[AdminController::class,'dashboard']);
 Route::get('/logout',[AdminController::class,'logout']);
 
 //Category Products

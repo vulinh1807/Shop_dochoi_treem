@@ -9,18 +9,31 @@ use Illuminate\Support\Facades\Session;
 
 class CategoryProduct extends Controller
 {
+    public function AuthenLogin()
+    {
+        $admin_id = Session::get('admin_id');
+        if($admin_id)
+        {
+            redirect('dashboard');
+        }else{
+            redirect('admin')->send();
+        }
+    }
     public function add_category_product()
     {
+        $this -> AuthenLogin();
         return view('admin.add_category_product');
     }
     public function all_category_product()
     {
+        $this -> AuthenLogin();
         $all_category_product=DB::table('tbl_category_product')->get();
         $manager_category_product = view('admin.all_category_product') -> with('all_category_product',$all_category_product);
         return view('admin_layout') -> with('admin.all_category_product',$manager_category_product);
     }
     public function save_category_product(Request $request)
     {
+        $this -> AuthenLogin();
         $data=array();
         $data['category_name'] = $request -> add_name_category;//category_product_name
         $data['category_desc'] = $request -> category_product_des;//category_product_desc
@@ -41,12 +54,14 @@ class CategoryProduct extends Controller
     }
     public function edit_category_product($category_product_id)
     {
+        $this -> AuthenLogin();
         $edit_category_product=DB::table('tbl_category_product')->where('category_id',$category_product_id)->get();
         $manager_category_product = view('admin.edit_category_product') -> with('edit_category_product',$edit_category_product);
         return view('admin_layout') -> with('admin.edit_category_product',$manager_category_product);
     }
     public function update_category_product(Request $request,$category_product_id)
     {
+        $this -> AuthenLogin();
         $data = array();
         $data['category_name'] = $request->add_name_category;
         $data['category_desc'] = $request->category_product_desc;
@@ -56,6 +71,7 @@ class CategoryProduct extends Controller
     }
     public function delete_category_product($category_product_id)
     {
+        $this -> AuthenLogin();
         DB::table('tbl_category_product') ->where('category_id',$category_product_id) -> delete();
         Session::put('message','Deleted!');
         return redirect('/all-category-product');

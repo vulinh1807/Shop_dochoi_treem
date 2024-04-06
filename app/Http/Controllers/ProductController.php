@@ -9,8 +9,19 @@ use Illuminate\Support\Facades\Redirect;
 
 class ProductController extends Controller
 {
+    public function AuthenLogin()
+    {
+        $admin_id = Session::get('admin_id');
+        if($admin_id)
+        {
+            redirect('dashboard');
+        }else{
+            redirect('admin')->send();
+        }
+    }
     public function add_product()
     {
+        $this -> AuthenLogin();
         $cate_product = DB::table('tbl_category_product') -> orderBy('category_id','desc')->get();
         $bra_product = DB::table('tbl_brand_product') -> orderBy('brand_id','desc')->get();
         return view('admin.add_product') 
@@ -19,6 +30,7 @@ class ProductController extends Controller
     }
     public function all_product()
     {
+        $this -> AuthenLogin();
         $all_product=DB::table('tbl_product')
         ->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')
         ->join('tbl_brand_product','tbl_brand_product.brand_id','=','tbl_product.brand_id')
@@ -28,9 +40,10 @@ class ProductController extends Controller
     }
     public function save_product(Request $request)
     {
+        $this -> AuthenLogin();
         $data=array();
         $data['product_name'] = $request -> add_name_product;
-        $data['product_price'] = $request -> product_des;
+        $data['product_price'] = $request -> product_price;
         $data['product_desc'] = $request ->product_desc; 
         //$data['product_content'] = $request ->product_content;
         $data['product_status'] = $request ->product_status;
@@ -41,7 +54,7 @@ class ProductController extends Controller
             $get_name_image = $get_image->getClientOriginalName();
             $name_image = current(explode('.',$get_name_image));
             $new_image = $name_image.rand(0,99).','.$get_image->getClientOriginalExtension();
-            $get_image->move('public/uploads/product',$new_image);
+            $get_image->move('public/upload/product',$new_image);
             $data['product_image'] = $new_image;
             DB::table('tbl_product')->insert($data);
             Session::put('message','');
@@ -64,6 +77,7 @@ class ProductController extends Controller
     }
     public function edit_product($product_id)
     {
+        $this -> AuthenLogin();
         $cate_product = DB::table('tbl_category_product') -> orderBy('category_id','desc')->get();
         $bra_product = DB::table('tbl_brand_product') -> orderBy('brand_id','desc')->get();
         $edit_product=DB::table('tbl_product')->where('product_id',$product_id)->get();
@@ -72,6 +86,7 @@ class ProductController extends Controller
     }
     public function update_product(Request $request,$product_id)
     {
+        $this -> AuthenLogin();
         $data = array();
         $data['product_name'] = $request->add_name_product;
         $data['product_price'] = $request -> product_des;
@@ -86,7 +101,7 @@ class ProductController extends Controller
             $get_name_image = $get_image->getClientOriginalName();
             $name_image = current(explode('.',$get_name_image));
             $new_image = $name_image.rand(0,99).','.$get_image->getClientOriginalExtension();
-            $get_image->move('public/uploads/product',$new_image);
+            $get_image->move('public/upload/product',$new_image);
             $data['product_image'] = $new_image;
             DB::table('tbl_product')->where('product_id',$product_id)->update($data);
             Session::put('message','Updated!');
@@ -98,6 +113,7 @@ class ProductController extends Controller
     }
     public function delete_product($product_id)
     {
+        $this -> AuthenLogin();
         DB::table('tbl_product') ->where('product_id',$product_id) -> delete();
         Session::put('message','Deleted item!');
         return Redirect::to('/all-product');

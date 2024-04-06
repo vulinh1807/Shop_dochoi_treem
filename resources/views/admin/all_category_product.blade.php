@@ -86,7 +86,7 @@
               <a href="{{URL::to('/delete-category-product/'.$cate->category_id)}}" onclick="return confirm('Are you sure? DELETE IT?')" class="active styling-edit" ul-toggle-class="">
                 <i class="fa fa-times text-danger text"></i>
               </a>
-              </td>
+            </td>
           </tr>
           @endforeach 
         </tbody>

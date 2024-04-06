@@ -77,7 +77,7 @@
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                 {{-- <i class="fa fa-times text-danger text" aria-hidden="true"></i> --}}
               </a>
-                <a href="{{URL::to('/delete-brand-product/'.$brand->brand_id)}}" onclick="return confirm('do you still wanna delete?')" class="active styling-edit" ul-toggle-class=""></a>
+                <a href="{{URL::to('/delete-brand-product/'.$brand->brand_id)}}" onclick="return confirm('do you still wanna delete?')" class="active styling-edit" ul-toggle-class="">
                 <i class="fa fa-times text-danger text" aria-hidden="true"></i>
               </a>
               </td>

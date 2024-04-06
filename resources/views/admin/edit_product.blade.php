@@ -30,13 +30,13 @@
                         <img src="{{URL::to('public/uploads/product/'.$pro -> product_image)}}" height="100" width="100">
                     </div>
                     <div class="form-group">
-                        <label for="product_des">Description</label>
-                        <textarea style="resize: none" rows="3" class="form-control" name="product_des" >{{$pro->product_desc}}</textarea>
+                        <label for="product_desc">Description</label>
+                        <textarea style="resize: none" rows="3" class="form-control" name="product_desc" >{{$pro->product_desc}}</textarea>
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="product_des">Content</label>
                         <textarea style="resize: none" rows="3" class="form-control" name="product_content" >{{$pro->product_content}}</textarea>
-                    </div>
+                    </div> --}}
                     <div class="form-group">
                       <label for="exampleInputEmail1">Price</label>
                       <input type="text" name="product_price"
@@ -69,8 +69,8 @@
                     <div class="form-group">
                       <label for="form-control input-sm m-bot15">Active/Unactive</label>
                       <select class="form-control input-sm m-bot15" name="product_status">
-                        <option value="0">Hide</option>
-                        <option value="1">Show</option>
+                        <option value="0">Unactive</option>
+                        <option value="1">Active</option>
                       </select>
                     </div>
                     <button type="submit" name="add_product" class="btn btn-info">Update</button>
