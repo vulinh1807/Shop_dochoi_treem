@@ -35,7 +35,7 @@ class ProductController extends Controller
         //$data['product_content'] = $request ->product_content;
         $data['product_status'] = $request ->product_status;
         $data['category_id'] = $request ->cate_product;
-        $data['brand_id'] = $request ->brand_product;
+        $data['brand_id'] = $request ->bra_product;
         $get_image = $request ->file('product_image');
         if($get_image){
             $get_name_image = $get_image->getClientOriginalName();
