@@ -31,17 +31,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="w3layouts-main">
 	<h2>Sign In Now</h2>
 	<?php
-	$message = $request->session()->get('message');
+	$message = Session::get('message');
 	if($message)
 	{
-		echo '<span class="text-alert">'.$message.'</span>';
+		echo '<span style="color:yellow;">'.$message.'</span>';
 		Session::put('message',null);
 	}
 	?>
-		<form action="{{URL::to('/admin-dashboard')}}" method="post">
+		<form action="{{URL::to('/admin-dashboard')}}" method="get">
 			{{csrf_field()}}
-			<input type="text" class="ggg" name="admin_email" placeholder="type E-MAIL" required="">
-			<input type="password" class="ggg" name="admin_password" placeholder="type PASSWORD" required="">
+			<input type="text" class="ggg" name="admin_email" placeholder="E-MAIL" required="">
+			<input type="password" class="ggg" name="admin_password" placeholder="PASSWORD" required="">
 			<span><input type="checkbox" />Remember Me</span>
 			<h6><a href="#">Forgot Password?</a></h6>
 				<div class="clearfix"></div>
