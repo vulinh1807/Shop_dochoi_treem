@@ -18,10 +18,10 @@ use App\Http\Controllers\ProductController;
 |
 */
 //Frontend
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/home', function () {
+    return view('layout');
 });
-Route::get('/home', [HomeController::class,'index']);
+//Route::get('/home', [HomeController::class,'index']);
 
 
 //Backend
