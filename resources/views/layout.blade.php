@@ -211,13 +211,12 @@
 	<section>
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-12 padding-bottom">
+				<div class="col-sm-3">
 					<div class="left-sidebar">
 						<h2>Category</h2>
 						<div class="panel-group category-products" id="accordian"><!--category-products-->
 							
-			@foreach ($category as $key => $cate)
-                            
+						@foreach ($category as $key => $cate)         
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h4 class="panel-title">
@@ -227,25 +226,16 @@
 									</h4>
 								</div>
 							</div>
+							@endforeach
 						</div><!--/category-products-->
-						
-			@endforeach
 					
 						<div class="brands_products"><!--brands_products-->
 							<h2>Brands</h2>
 							<div class="brands-name">
 								<ul class="nav nav-pills nav-stacked">
-      @foreach ($brand as $key => $bra)
-                                        
+      					@foreach ($brand as $key => $bra)                        
 									<li><a href="{{URL::asset('/brand-product/'.$bra->brand_id)}}"> <span class="pull-right">(50)</span>{{$bra->brand_name}}</a></li>
-									<li><a href="#"> <span class="pull-right">(56)</span>{{$bra->brand_name}}</a></li>
-									<li><a href="#"> <span class="pull-right">(27)</span>{{$bra->brand_name}}</a></li>
-									<li><a href="#"> <span class="pull-right">(32)</span>{{$bra->brand_name}}</a></li>
-									<li><a href="#"> <span class="pull-right">(5)</span>{{$bra->brand_name}}</a></li>
-									<li><a href="#"> <span class="pull-right">(9)</span>{{$bra->brand_name}}</a></li>
-									<li><a href="#"> <span class="pull-right">(4)</span>{{$bra->brand_name}}</a></li>
-
-      @endforeach
+								@endforeach
 								</ul>
 							</div>
 						</div><!--/brands_products-->
@@ -386,7 +376,7 @@
 			</div>
 		</div>
 	</section>
-	
+	<hr/>
 	<footer id="footer"><!--Footer-->
 		<div class="footer-top">
 			<div class="container">
