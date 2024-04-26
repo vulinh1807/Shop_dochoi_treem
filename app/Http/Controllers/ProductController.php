@@ -118,4 +118,28 @@ class ProductController extends Controller
         Session::put('message','Deleted item!');
         return Redirect::to('/all-product');
     }
+    //end Admin's Page
+    public function product_details($product_id)
+    {
+        $cate_product = DB::table('tbl_category_product') ->where('category_status','0') -> orderBy('category_id','desc')->get();
+        $bra_product = DB::table('tbl_brand_product')->where('brand_status','0') -> orderBy('brand_id','desc')->get();
+        $product_detail= DB::table('tbl_product')
+        ->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')
+        ->join('tbl_brand_product','tbl_brand_product.brand_id','=','tbl_product.brand_id') 
+        ->where('tbl_product.product_id',$product_id)->get();
+        foreach($product_detail as $value)
+        {
+            $category_id = $value -> category_id;
+        }
+        $related_product= DB::table('tbl_product')
+        ->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')
+        ->join('tbl_brand_product','tbl_brand_product.brand_id','=','tbl_product.brand_id')
+        ->where('tbl_category_product.category_id',$category_id)
+        ->whereNotIn('tbl_product.product_id',[$product_id])->get();
+        return view('pages.product.show_detail')
+        ->with('category',$cate_product)
+        ->with('brand',$bra_product)
+        ->with('product_detail',$product_detail)
+        ->with('related_product',$related_product);
+    }
 }

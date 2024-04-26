@@ -6,6 +6,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BrandProduct;
 use App\Http\Controllers\CategoryProduct;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,18 +20,17 @@ use App\Http\Controllers\ProductController;
 |
 */
 //Frontend
-Route::get('/home', function () {
-    return view('layout');
-});
-//Route::get('/home', [HomeController::class,'index']);
+//Route::get('/',[HomeController::class,'index']);
+Route::get('/home', [HomeController::class,'index']);
 
+//danh muc san pham va thuong hieu
+Route::get('/category-product/{$category_id}',[CategoryProduct::class,'show_category_home']);
+Route::get('/brand-product/{$brand_id}',[BrandProduct::class,'show_brand_home']);
+Route::get('/product-detail/{$product_id}',[ProductController::class,'product_details']);
 
 //Backend
 Route::get('/admin',[AdminController::class,'index']);
 Route::get('/dashboard',[AdminController::class,'show_dashboard']);
-// Route::get('/',function(){
-//   return response()->json(['stuff'=>phpinfo()]);
-// });
 Route::get('/admin-dashboard',[AdminController::class,'dashboard']);
 Route::get('/logout',[AdminController::class,'logout']);
 
@@ -62,3 +63,16 @@ Route::get('/unactive-product/{product_id}',[ProductController::class,'unactive_
 Route::get('/active-product/{product_id}',[ProductController::class,'active_product']);
 Route::post('/save-product',[ProductController::class,'save_product']);
 Route::post('/update-product/{product_id}',[ProductController::class,'update_product']);
+
+//Cart
+Route::post('/save-cart',[CartController::class,'save_cart']);
+Route::get('/show-cart',[CartController::class,'show_cart']);
+Route::get('/delete-to-cart/{rowId}',[CartController::class,'delete_to_cart']);
+Route::get('/update-cart-quantity',[CartController::class,'update_cart_quantity']);
+Route::get('/delete-to-cart/{rowId}',[CartController::class,'delete_to_cart']);
+
+//Check-out
+Route::get('/login-checkout',[CheckoutController::class,'login_checkout']);
+Route::post('/add-customer',['CheckoutController@add_customer']);
+Route::get('/checkout',['CheckoutController@checkout']);
+Route::post('/save-checkout-customer',['CheckoutController@save_checkout_customer']);
