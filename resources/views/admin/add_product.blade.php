@@ -7,7 +7,7 @@
                  Add new product
               </header>
                 <?php
-                 $message = Session::get('', 'message');
+                 $message = Session::get('');
                  if($message){
                     echo '<span class="text-alert">'.$message.'</span>';
                     Session::put('message',null);

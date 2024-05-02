@@ -53,17 +53,17 @@ class ProductController extends Controller
         if($get_image){
             $get_name_image = $get_image->getClientOriginalName();
             $name_image = current(explode('.',$get_name_image));
-            $new_image = $name_image.rand(0,99).','.$get_image->getClientOriginalExtension();
-            $get_image->move('public/upload/product',$new_image);
-            $data['product_image'] = $new_image;
+            $new_image = $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
+            $get_image->move('upload/products',$new_image);
+            $data['product_image'] = $new_image; 
             DB::table('tbl_product')->insert($data);
-            Session::put('message','');
-            return redirect('/all-product');
+            Session::put('message','Added!');
+            return Redirect::to('/all-product');
         }
         $data['product_image'] = ''; 
         DB::table('tbl_product')->insert($data);
         Session::put('message','Added!');
-        return Redirect::to('/all-product');
+        return Redirect::to('/add-product');
     }
     public function unactive_product($product_id){
         DB::table('tbl_product')->where('product_id',$product_id)->update(['product_status' => 1]);
@@ -101,7 +101,7 @@ class ProductController extends Controller
             $get_name_image = $get_image->getClientOriginalName();
             $name_image = current(explode('.',$get_name_image));
             $new_image = $name_image.rand(0,99).','.$get_image->getClientOriginalExtension();
-            $get_image->move('public/upload/product',$new_image);
+            $get_image->move('/upload/products',$new_image);
             $data['product_image'] = $new_image;
             DB::table('tbl_product')->where('product_id',$product_id)->update($data);
             Session::put('message','Updated!');
@@ -122,16 +122,19 @@ class ProductController extends Controller
     public function product_details($product_id)
     {
         $cate_product = DB::table('tbl_category_product') ->where('category_status','0') -> orderBy('category_id','desc')->get();
+
         $bra_product = DB::table('tbl_brand_product')->where('brand_status','0') -> orderBy('brand_id','desc')->get();
-        $product_detail= DB::table('tbl_product')
+
+        $product_details= DB::table('tbl_product')
         ->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')
         ->join('tbl_brand_product','tbl_brand_product.brand_id','=','tbl_product.brand_id') 
         ->where('tbl_product.product_id',$product_id)->get();
-        foreach($product_detail as $value)
+        foreach($product_details as $value)
         {
             $category_id = $value -> category_id;
         }
-        $related_product= DB::table('tbl_product')
+
+        $related_products= DB::table('tbl_product')
         ->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')
         ->join('tbl_brand_product','tbl_brand_product.brand_id','=','tbl_product.brand_id')
         ->where('tbl_category_product.category_id',$category_id)
@@ -139,7 +142,7 @@ class ProductController extends Controller
         return view('pages.product.show_detail')
         ->with('category',$cate_product)
         ->with('brand',$bra_product)
-        ->with('product_detail',$product_detail)
-        ->with('related_product',$related_product);
+        ->with('product_details',$product_details)
+        ->with('related_products',$related_products);
     }
 }

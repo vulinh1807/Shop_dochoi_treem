@@ -1,26 +1,19 @@
 @extends('layout')
 @section('content')
 <div class="features_items"><!--features_items-->
-  @foreach ($brand_name as $key -> $b_name )
-    <h2 class="title text-center">Brand: {{$b_name -> brand_name}}</h2>
+  @foreach ($brand_by_name as $key=>$b_name )
+  <h2 class="title text-center">Brand: {{$b_name ->brand_name}}</h2>
   @endforeach
-  @foreach ($brand_by_id as $key => $product )
-  <a href="{{URL::to('/product-detail/'.$product->product_id)}}">
+  @foreach ($brand_by_id as $key=>$b_product )
+  <a href="{{URL::to('/product-details/'.$b_product->product_id)}}">
     <div class="col-sm-4">
       <div class="product-image-wrapper">
         <div class="single-products">
             <div class="productinfo text-center">
-              <img src="{{URL::to('public/uploads/products/'.$product->product_image)}}" alt="" />
-              <h2>{{number_format($product -> product_price).''.'VND'}}</h2>
-              <p>{{$product -> product_name}}</p>
+              <img src="{{URL::to('/upload/products/'.$b_product->product_image)}}" alt="" />
+              <h2>{{number_format($b_product->product_price).''.'VND'}}</h2>
+              <p>{{$b_product->product_name}}</p>
               <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-            </div>
-            <div class="product-overlay">
-              <div class="overlay-content">
-                <h2>{{number_format($product -> product_price).''.'VND'}}</h2>
-                <p>{{$product -> product_name}}</p>
-                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-              </div>
             </div>
         </div>
         <div class="choose">

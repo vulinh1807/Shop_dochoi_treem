@@ -23,10 +23,10 @@ use App\Http\Controllers\CheckoutController;
 //Route::get('/',[HomeController::class,'index']);
 Route::get('/home', [HomeController::class,'index']);
 
-//danh muc san pham va thuong hieu
-Route::get('/category-product/{$category_id}',[CategoryProduct::class,'show_category_home']);
-Route::get('/brand-product/{$brand_id}',[BrandProduct::class,'show_brand_home']);
-Route::get('/product-detail/{$product_id}',[ProductController::class,'product_details']);
+//Show category and show brand
+Route::get('/category-product',[CategoryProduct::class,'show_category']);
+Route::get('/brand-product',[BrandProduct::class,'show_brand']);
+Route::get('/product-detail/{product_id}',[ProductController::class,'product_details']);
 
 //Backend
 Route::get('/admin',[AdminController::class,'index']);
@@ -69,7 +69,7 @@ Route::post('/save-cart',[CartController::class,'save_cart']);
 Route::get('/show-cart',[CartController::class,'show_cart']);
 Route::get('/delete-to-cart/{rowId}',[CartController::class,'delete_to_cart']);
 Route::get('/update-cart-quantity',[CartController::class,'update_cart_quantity']);
-Route::get('/delete-to-cart/{rowId}',[CartController::class,'delete_to_cart']);
+
 
 //Check-out
 Route::get('/login-checkout',[CheckoutController::class,'login_checkout']);

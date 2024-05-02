@@ -17,7 +17,7 @@
     <script src="{{URL::asset('/frontend/js/html5shiv.js')}}"></script>
     <script src="{{URL::asset('/frontend/js/respond.min.js')}}"></script>
     <![endif]-->       
-    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="shortcut icon" href="favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
@@ -78,7 +78,9 @@
 								</button>
 								<ul class="dropdown-menu">
 									<li><a href="#">Canadian Dollar</a></li>
-									<li><a href="#">Pound</a></li>
+									<li><a href="#">USA Dollar</a></li>
+									<li><a href="#">Singapore Dollar</a></li>
+									<li><a href="#">Hong Kong Dollar</a></li>
 								</ul>
 							</div>
 						</div>
@@ -86,11 +88,34 @@
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href="{{URL::to('/login-checkout')}}"><i class="fa fa-user"></i> Account</a></li>
-								<li><a href="{{URL::to('/login-checkout')}}"><i class="fa fa-star"></i> Wishlist</a></li>
+								<li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
+								<?php
+								$customer_id = Session::get('customer_id');
+								if($customer_id!=NULL)
+								{
+								?>
 								<li><a href="{{URL::to('/checkout')}}"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+								<?php
+								}else{
+								?>
+									<li><a href="{{URL::to('/login-checkout')}}"><i class="fa fa-lock"></i> Checkout</a></li>
+								<?php
+								}
+								?>
 								<li><a href="{{URL::to('/show-cart')}}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-								<li><a href="{{URL::to('/login-checkout')}}"><i class="fa fa-lock"></i> Login</a></li>
+								<?php
+								$customer_id = Session::get('customer_id');
+								if($customer_id!=NULL)
+								{
+								?>
+								<li><a href="{{URL::to('/logout-checkout')}}"><i class="fa fa-lock"></i> Logout</a></li>
+								<?php
+								}else{
+								?>
+									<li><a href="{{URL::to('/login-checkout')}}"><i class="fa fa-lock"></i> Login</a></li>
+								<?php
+								}
+								?>
 							</ul>
 						</div>
 					</div>
@@ -112,7 +137,7 @@
 						</div>
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="{{URL::asset('/home')}}" class="active">Home</a></li>
+								<li><a href="{{URL::to('/home')}}" class="active">Home</a></li>
 								<li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="shop.html">Products</a></li>
@@ -128,7 +153,7 @@
 										<li><a href="blog-single.html">Blog Single</a></li>
                                     </ul>
                                 </li> 
-								<li><a href="404.html">Cart</a></li>
+								<li><a href="{{URL::to('/show-cart')}}">Cart</a></li>
 								<li><a href="contact-us.html">Contact</a></li>
 							</ul>
 						</div>
@@ -143,7 +168,7 @@
 		</div><!--/header-bottom-->
 	</header><!--/header-->
 	
-	<section id="slider"><!--slider-->
+	<se ction id="slider"><!--slider-->
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12">
@@ -202,27 +227,27 @@
 							<i class="fa fa-angle-right"></i>
 						</a>
 					</div>
-					
 				</div>
 			</div>
 		</div>
-	</section><!--/slider-->
+	</se><!--/slider-->
 	
 	<section>
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-3">
 					<div class="left-sidebar">
-						<h2>Category</h2>
+						<h2>Categories</h2>
 						<div class="panel-group category-products" id="accordian"><!--category-products-->
-							
-						@foreach ($category as $key => $cate)         
+						@foreach ($category as $key->$category)         
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian" href="{{URL::asset('/category-product/'.$cate->category_id)}}">
-											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
-											{{$cate->category_name}}</a>
+										<a data-toggle="collapse" data-parent="#accordian" href="{{URL::to('/category-product/'.$category->category_id)}}">
+											{{-- <span class="pull-right">
+												<i class="fa fa-plus"></i>
+											</span> --}}
+											{{$category->category_name}}</a>
 									</h4>
 								</div>
 							</div>
@@ -233,8 +258,8 @@
 							<h2>Brands</h2>
 							<div class="brands-name">
 								<ul class="nav nav-pills nav-stacked">
-      					@foreach ($brand as $key => $bra)                        
-									<li><a href="{{URL::asset('/brand-product/'.$bra->brand_id)}}"> <span class="pull-right">(50)</span>{{$bra->brand_name}}</a></li>
+      					@foreach ($brand as $key->$brand)                        
+									<li><a href="{{URL::to('/brand-product/'.$brand->brand_id)}}"> <span class="pull-right"></span>{{$brand->brand_name}}</a></li>
 								@endforeach
 								</ul>
 							</div>
@@ -534,11 +559,10 @@
 		</div>
 		
 	</footer><!--/Footer-->
-	
     <script src="{{URL::asset('/frontend/js/jquery.js')}}"></script>
-	<script src="{{URL::asset('/frontend/js/bootstrap.min.js')}}"></script>
-	<script src="{{URL::asset('/frontend/js/jquery.scrollUp.min.j')}}s"></script>
-	<script src="{{URL::asset('/frontend/js/price-range.js')}}"></script>
+		<script src="{{URL::asset('/frontend/js/bootstrap.min.js')}}"></script>
+		<script src="{{URL::asset('/frontend/js/jquery.scrollUp.min.j')}}s"></script>
+		<script src="{{URL::asset('/frontend/js/price-range.js')}}"></script>
     <script src="{{URL::asset('/frontend/js/jquery.prettyPhoto.js')}}"></script>
     <script src="{{URL::asset('/frontend/js/main.js')}}"></script>
 </body>

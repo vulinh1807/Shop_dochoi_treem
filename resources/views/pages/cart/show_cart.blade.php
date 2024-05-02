@@ -28,7 +28,7 @@
           <tr>
             <td class="cart_product">
               <a href="">
-                <img src="{{URL::to('public/uploads/products/'.$v_content->option->image)}}" width="50" alt="" />
+                <img src="{{URL::to('/uploads/products/'.$v_content->option->image)}}" width="50" alt="" />
               </a>
             </td>
             <td class="cart_description">
@@ -78,9 +78,20 @@
                       <li>Eco Tax <span>{{Cart::tax(0).' '.'VND'}}</span></li>
                       <li>Shipping Cost <span>Free</span></li>
                       <li>Total <span>$61</span>{{Cart::total(0,',','.').' '.'VND'}}</li>
+                    <?php
+                      $customer_id = Session::get('customer_id');
+                      if($customer_id!=NULL)
+                      {
+                      ?>
+                      <li><a class="btn btn-default check_out" href="{{URL::to('/checkout')}}">Check Out</a></li>
+                      <?php
+                      }else{
+                      ?>
+                        <li><a class="btn btn-default check_out" href="{{URL::to('/login-checkout')}}">Check Out</a></li>
+                      <?php
+                      }
+                      ?>
                     </ul>
-                      {{-- <a class="btn btn-default update" href="">Update</a> --}}
-                      <a class="btn btn-default check_out" href="{{URL::to('/login-checkout')}}">Check Out</a>
                   </div>
                 </div>
               </div>
