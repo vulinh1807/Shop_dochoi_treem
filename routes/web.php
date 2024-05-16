@@ -20,13 +20,15 @@ use App\Http\Controllers\CheckoutController;
 |
 */
 //Frontend
-//Route::get('/',[HomeController::class,'index']);
-Route::get('/home', [HomeController::class,'index']);
+Route::get('/',[HomeController::class,'index']);
+Route::get('/home',function(){
+  return 'HomeController@index';
+});
 
 //Show category and show brand
-Route::get('/category-product',[CategoryProduct::class,'show_category']);
-Route::get('/brand-product',[BrandProduct::class,'show_brand']);
-Route::get('/product-detail/{product_id}',[ProductController::class,'product_details']);
+Route::get('/category-product/{product_id}',[CategoryProduct::class,'show_category']);
+Route::get('/brand-product/{product_id}',[BrandProduct::class,'show_brand']);
+Route::get('/product-details/{product_id}',[ProductController::class,'show_product_details']);
 
 //Backend
 Route::get('/admin',[AdminController::class,'index']);
@@ -73,6 +75,7 @@ Route::get('/update-cart-quantity',[CartController::class,'update_cart_quantity'
 
 //Check-out
 Route::get('/login-checkout',[CheckoutController::class,'login_checkout']);
+Route::get('/logout-checkout',[CheckoutController::class,'logout_checkout']);
 Route::post('/add-customer',['CheckoutController@add_customer']);
 Route::get('/checkout',['CheckoutController@checkout']);
 Route::post('/save-checkout-customer',['CheckoutController@save_checkout_customer']);

@@ -119,29 +119,31 @@ class ProductController extends Controller
         return Redirect::to('/all-product');
     }
     //end Admin's Page
-    public function product_details($product_id)
+    public function show_product_details(Request $request ,$productId)
     {
-        $cate_product = DB::table('tbl_category_product') ->where('category_status','0') -> orderBy('category_id','desc')->get();
+        $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderBy('category_id','desc')->get();
 
-        $bra_product = DB::table('tbl_brand_product')->where('brand_status','0') -> orderBy('brand_id','desc')->get();
+        $bran_product = DB::table('tbl_brand_product')->where('brand_status','0')->orderBy('brand_id','desc')->get();
 
         $product_details= DB::table('tbl_product')
         ->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')
         ->join('tbl_brand_product','tbl_brand_product.brand_id','=','tbl_product.brand_id') 
-        ->where('tbl_product.product_id',$product_id)->get();
-        foreach($product_details as $value)
+        ->where('tbl_product.product_id',$productId)->get();
+        foreach($product_details as $key=>$value)
         {
             $category_id = $value -> category_id;
+            $productid = $value->product_id;
+            $productCate = $value->category_name;
         }
 
         $related_products= DB::table('tbl_product')
         ->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')
         ->join('tbl_brand_product','tbl_brand_product.brand_id','=','tbl_product.brand_id')
         ->where('tbl_category_product.category_id',$category_id)
-        ->whereNotIn('tbl_product.product_id',[$product_id])->get();
+        ->whereNotIn('tbl_product.product_id',[$productid])->get();
         return view('pages.product.show_detail')
-        ->with('category',$cate_product)
-        ->with('brand',$bra_product)
+        ->with('cate_product',$cate_product)
+        ->with('bran_product',$bran_product)
         ->with('product_details',$product_details)
         ->with('related_products',$related_products);
     }

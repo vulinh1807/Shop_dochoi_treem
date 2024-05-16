@@ -237,34 +237,41 @@
 			<div class="row">
 				<div class="col-sm-3">
 					<div class="left-sidebar">
-						<h2>Categories</h2>
-						<div class="panel-group category-products" id="accordian"><!--category-products-->
-						@foreach ($category as $key->$category)         
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian" href="{{URL::to('/category-product/'.$category->category_id)}}">
-											{{-- <span class="pull-right">
-												<i class="fa fa-plus"></i>
-											</span> --}}
-											{{$category->category_name}}</a>
-									</h4>
+						<div class="panel-group category-products"><!--category-products-->
+							<h2>Categories</h2>
+							{{-- @foreach ($category as $key=>$c)         
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a href="{{URL::to('/category-product/'.$c->category_id)}}">
+												{{$c->category_name}}</a>
+										</h4>
+									</div>
 								</div>
-							</div>
-							@endforeach
+								@endforeach --}}
+								<div class="panel-group category-product" id="accordian">
+									<ul class="nav nav-pills nav-stacked">
+										@foreach ($category as $c)
+										<li>
+											<a href="{{URL::to('/category-product/'.$c->category_id)}}">
+											{{$c->category_name}}
+											</a>
+										</li>
+										@endforeach
+									</ul>
+								</div>
 						</div><!--/category-products-->
 					
 						<div class="brands_products"><!--brands_products-->
 							<h2>Brands</h2>
 							<div class="brands-name">
 								<ul class="nav nav-pills nav-stacked">
-      					@foreach ($brand as $key->$brand)                        
-									<li><a href="{{URL::to('/brand-product/'.$brand->brand_id)}}"> <span class="pull-right"></span>{{$brand->brand_name}}</a></li>
+      					@foreach ($brand as $key=>$b)                        
+									<li><a href="{{URL::to('/brand-product/'.$b->brand_id)}}"><span class="pull-right"></span>{{$b->brand_name}}</a></li>
 								@endforeach
 								</ul>
 							</div>
 						</div><!--/brands_products-->
-						
 						<div class="price-range"><!--price-range-->
 							<h2>Price Range</h2>
 							<div class="well text-center">
@@ -559,11 +566,12 @@
 		</div>
 		
 	</footer><!--/Footer-->
-    <script src="{{URL::asset('/frontend/js/jquery.js')}}"></script>
-		<script src="{{URL::asset('/frontend/js/bootstrap.min.js')}}"></script>
-		<script src="{{URL::asset('/frontend/js/jquery.scrollUp.min.j')}}s"></script>
-		<script src="{{URL::asset('/frontend/js/price-range.js')}}"></script>
-    <script src="{{URL::asset('/frontend/js/jquery.prettyPhoto.js')}}"></script>
-    <script src="{{URL::asset('/frontend/js/main.js')}}"></script>
+    <script src="{{URL::to('/frontend/js/jquery.js')}}"></script>
+		{{-- <script src="{{URL::to('/frontend/js/bootstrap.min.js')}}"></script> --}}
+		<script src="{{URL::to('//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css')}}"></script>
+		<script src="{{URL::to('/frontend/js/jquery.scrollUp.min.j')}}s"></script>
+		<script src="{{URL::to('/frontend/js/price-range.js')}}"></script>
+    <script src="{{URL::to('/frontend/js/jquery.prettyPhoto.js')}}"></script>
+    <script src="{{URL::to('/frontend/js/main.js')}}"></script>
 </body>
 </html>

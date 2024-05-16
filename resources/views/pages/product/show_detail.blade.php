@@ -1,10 +1,10 @@
 @extends('layout')
 @section('content')
-@foreach ($product_details as $key=>$pr_detail)
+@foreach ('$product_details as $key=>$details')
 <div class="product-details"><!--product-details-->
 						<div class="col-sm-6">
 							<div class="view-product">
-								<img src="{{URL::to('/upload/products/'.$pr_detail->product_image)}}" alt="" />
+								<img src="{{URL::asset('/upload/products/'.$details->product_image)}}" alt="" />
 								<h3>ZOOM</h3>
 							</div>
 							<div id="similar-product" class="carousel slide" data-ride="carousel">
@@ -28,17 +28,17 @@
 						</div>
 						<div class="col-sm-6">
 							<div class="product-information"><!--/product-information-->
-								<img src="{{URL::to('/upload/products/'.$pr_detail->product_image)}}" class="newarrival" alt="" />
-								<h2>{{$pr_detail->product_name}}</h2>
-								<p>ID: {{$pr_detail->product_id}}</p>
+								<img src="{{URL::asset('/upload/products/'.$details->product_image)}}" class="newarrival" alt="" />
+								<h2>{{$details->product_name}}</h2>
+								<p>ID: {{$details->product_id}}</p>
 								<img src="images/product-details/rating.png" alt="" />
-								<form action="{{URL::to('/save-cart')}}" method="POST">
+								<form action="{{URL::to('/admin')}}" method="POST">
 									 {{ csrf_field() }}
 									 <span>
-										 <span>{{number_format($pr_detail->product_price).'VND'}}</span>
+										 <span>{{number_format($details->product_price).'VND'}}</span>
 										 <label>Quantity:</label>
 										 <input type="number" name="quantity" min="1" value="1" />
-										 <input type="hidden" name="productid_hidden" value="{{$pr_detail->product_id}}" />
+										 <input type="hidden" name="productid_hidden" value="{{$details->product_id}}" />
 										 <button type="submit" class="btn btn-fefault cart">
 											 <i class="fa fa-shopping-cart"></i>
 											 Add to cart
@@ -47,8 +47,8 @@
 								</form>
 								<p><b>Availability:</b> In Stock</p>
 								<p><b>Condition:</b> New</p>
-								<p><b>Brand:</b> {{$pr_detail->brand_name}}</p>
-								<p><b>Category:</b> {{$pr_detail->category_name}}</p>
+								<p><b>Brand:</b> {{$details->brand_name}}</p>
+								<p><b>Category:</b> {{$details->category_name}}</p>
 								<a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>
 							</div><!--/product-information-->
 						</div>
@@ -59,15 +59,15 @@
                 <li  class="active"><a href="#details" data-toggle="tab">Decsription</a></li>
 								<li><a href="#companyprofile" data-toggle="tab">Detail</a></li>
 								<li><a href="#tag" data-toggle="tab">Tag</a></li>
-								<li><a href="#reviews" data-toggle="tab">Reviews (5)</a></li>
+								<li><a href="#reviews" data-toggle="tab">Reviews</a></li>
 							</ul>
 						</div>
 						<div class="tab-content">
 							<div class="tab-pane fade active in" id="details" >
-                <p>{!!$pr_detail->product_desc!!}</p>
+                <p>{!!$details->product_desc!!}</p>
 							</div>
 							<div class="tab-pane fade" id="companyprofile" >
-                <p>{!!$pr_detail->product_content!!}</p>
+                <p>{!!$details->product_content!!}</p>
 							</div>
 							
 							{{-- <div class="tab-pane fade" id="tag" >
@@ -85,7 +85,7 @@
 								</div>
 							</div> --}}
 							
-							<div class="tab-pane fade active in" id="reviews" >
+							<div class="tab-pane fade" id="reviews" >
                 <div class="col-sm-12">
 									<ul>
                     <li><a href=""><i class="fa fa-user"></i>EUGEN</a></li>
@@ -116,7 +116,7 @@
 						<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
 							<div class="carousel-inner">
 								<div class="item active">
-									@foreach ($related_products as $key->$related)	
+									@foreach ($related_products as $key=>$related)	
 									<div class="col-sm-4">
 										<div class="product-image-wrapper">
 											<div class="single-products">

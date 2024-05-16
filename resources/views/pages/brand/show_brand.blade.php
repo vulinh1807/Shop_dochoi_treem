@@ -2,7 +2,7 @@
 @section('content')
 <div class="features_items"><!--features_items-->
   @foreach ($brand_by_name as $key=>$b_name )
-  <h2 class="title text-center">Brand: {{$b_name ->brand_name}}</h2>
+    <h2 class="title text-center">Brand: {{$b_name->brand_name}}</h2>
   @endforeach
   @foreach ($brand_by_id as $key=>$b_product )
   <a href="{{URL::to('/product-details/'.$b_product->product_id)}}">

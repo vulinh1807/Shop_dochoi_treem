@@ -1,5 +1,5 @@
 @extends('layout')
-@section('content')
+@section('category-content')
 <div class="features_items"><!--features_items-->
   @foreach ($category_by_name as $key=>$c_name)
       <h2 class="title text-center">Category: {{$c_name->category_name}}</h2>
@@ -22,6 +22,7 @@
                 <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
               </div>
             </div>
+  @endforeach
         </div>
         <div class="choose">
           <ul class="nav nav-pills nav-justified">
@@ -31,7 +32,7 @@
         </div>
       </div>
     </div>
-  </a>
-  @endforeach
+  </a> --}}
+  <h1>Hello</h1>
 </div>
 @endsection
