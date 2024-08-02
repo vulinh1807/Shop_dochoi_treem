@@ -15,21 +15,22 @@ class CartController extends Controller
 {
     public function save_cart(Request $request)
     {
-        $productId = $request->productid_hidden;
-        $quantity = $request->quantity;
+        $productId = $request->id;
+        $quantity = $request->qty;
         $product_info = DB::table('tbl_product')->where('product_id',$productId)->first();
         $data = DB::table('tbl_product')->where('product_id',$productId)->get();
         $data['id'] = $product_info ->product_id; 
-        $data['quantity'] = $quantity; 
+        $data['qty'] = $quantity; 
         $data['name'] = $product_info ->product_name; 
         $data['price'] = $product_info ->product_price; 
         $data['weight'] = '1kg'; 
-        $data['option']['image'] = $product_info ->product_image; 
+        $data['options']['image'] = $product_info ->product_image; 
         Cart::add($data);
         Cart::setGlobalTax(10);
-        $cate_product = DB::table('tbl_category_product') ->where('category_status','0') -> orderBy('category_id','desc')->get();
-        $bra_product = DB::table('tbl_brand_product')->where('brand_status','0') -> orderBy('brand_id','desc')->get();
-        return view('pages.cart.show_cart')->with('category',$cate_product)->with('brand',$bra_product);
+        // $cate_product = DB::table('tbl_category_product') ->where('category_status','0') -> orderBy('category_id','desc')->get();
+        // $bra_product = DB::table('tbl_brand_product')->where('brand_status','0') -> orderBy('brand_id','desc')->get();
+        // return view('pages.cart.show_cart')->with('category',$cate_product)->with('brand',$bra_product);
+        return Redirect::to('/show-cart');
     }
     public function show_cart()
     {

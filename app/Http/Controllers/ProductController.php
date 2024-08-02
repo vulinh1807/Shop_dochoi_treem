@@ -91,7 +91,7 @@ class ProductController extends Controller
         $data['product_name'] = $request->add_name_product;
         $data['product_price'] = $request -> product_des;
         $data['product_desc'] = $request ->product_desc; 
-        //$data['product_content'] = $request ->product_content;
+        $data['product_content'] = $request ->product_content;
         $data['category_id'] = $request ->cate_product;
         $data['brand_id'] = $request ->brand_product;
         $data['product_status']= $request -> product_status;
@@ -142,8 +142,8 @@ class ProductController extends Controller
         ->where('tbl_category_product.category_id',$category_id)
         ->whereNotIn('tbl_product.product_id',[$productid])->get();
         return view('pages.product.show_detail')
-        ->with('cate_product',$cate_product)
-        ->with('bran_product',$bran_product)
+        ->with('category_product',$cate_product)
+        ->with('brand_product',$bran_product)
         ->with('product_details',$product_details)
         ->with('related_products',$related_products);
     }

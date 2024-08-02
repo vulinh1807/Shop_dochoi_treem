@@ -90,6 +90,6 @@ class CategoryProduct extends Controller
         ->limit(1)
         ->get();
         return view('pages.category.show_category')
-        ->with('category',$cate_product)->with('brand',$bra_product)->with('category_by_id',$category_by_id)->with('category_by_name',$category_by_name);
+        ->with('category_product',$cate_product)->with('brand_product',$bra_product)->with('category_by_id',$category_by_id)->with('category_by_name',$category_by_name);
     }
 }

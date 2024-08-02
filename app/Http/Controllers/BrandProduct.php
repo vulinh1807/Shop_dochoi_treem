@@ -86,6 +86,6 @@ class BrandProduct extends Controller
         ->where('tbl_product.brand_id',$brand_id)
         ->get();
         $brand_by_name = DB::table('tbl_brand_product')->where('tbl_brand_product.brand_id',$brand_id)->get();
-        return view('pages.brand.show_brand')->with('brand_by_id',$brand_by_id)->with('brand_by_name',$brand_by_name)->with('category',$cate_product)->with('brand',$bra_product);
+        return view('pages.brand.show_brand')->with('brand_by_id',$brand_by_id)->with('brand_by_name',$brand_by_name)->with('category_product',$cate_product)->with('brand_product',$bra_product);
     }
 }

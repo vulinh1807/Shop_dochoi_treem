@@ -11,13 +11,14 @@
     <link href="{{URL::asset('/frontend/css/prettyPhoto.css')}}" rel="stylesheet">
     <link href="{{URL::asset('/frontend/css/price-range.css')}}" rel="stylesheet">
     <link href="{{URL::asset('/frontend/css/animate.css')}}" rel="stylesheet">
-	<link href="{{URL::asset('/frontend/css/main.css')}}" rel="stylesheet">
-	<link href="{{URL::asset('/frontend/css/responsive.css')}}" rel="stylesheet">
+		<link href="{{URL::asset('/frontend/css/main.css')}}" rel="stylesheet">
+		<link href="{{URL::asset('/frontend/css/responsive.css')}}" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="{{URL::asset('/frontend/js/html5shiv.js')}}"></script>
     <script src="{{URL::asset('/frontend/js/respond.min.js')}}"></script>
     <![endif]-->       
-    <link rel="shortcut icon" href="favicon.ico">
+    {{-- <link rel="shortcut icon" href="favicon.ico"> --}}
+		<link rel="shortcut icon" href="{{URL::asset('/favicon.ico')}}">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
@@ -239,7 +240,7 @@
 					<div class="left-sidebar">
 						<div class="panel-group category-products"><!--category-products-->
 							<h2>Categories</h2>
-							{{-- @foreach ($category as $key=>$c)         
+							@foreach ($category_product as $key => $c)         
 								<div class="panel panel-default">
 									<div class="panel-heading">
 										<h4 class="panel-title">
@@ -248,10 +249,10 @@
 										</h4>
 									</div>
 								</div>
-								@endforeach --}}
-								<div class="panel-group category-product" id="accordian">
+								@endforeach
+								{{-- <div class="panel-group category-product" id="accordian">
 									<ul class="nav nav-pills nav-stacked">
-										@foreach ($category as $c)
+										@foreach ($cate_product as $key => $c)
 										<li>
 											<a href="{{URL::to('/category-product/'.$c->category_id)}}">
 											{{$c->category_name}}
@@ -259,14 +260,14 @@
 										</li>
 										@endforeach
 									</ul>
-								</div>
+								</div> --}}
 						</div><!--/category-products-->
 					
 						<div class="brands_products"><!--brands_products-->
 							<h2>Brands</h2>
 							<div class="brands-name">
 								<ul class="nav nav-pills nav-stacked">
-      					@foreach ($brand as $key=>$b)                        
+      					@foreach ($brand_product as $key=>$b)                        
 									<li><a href="{{URL::to('/brand-product/'.$b->brand_id)}}"><span class="pull-right"></span>{{$b->brand_name}}</a></li>
 								@endforeach
 								</ul>

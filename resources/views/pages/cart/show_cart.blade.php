@@ -28,7 +28,7 @@
           <tr>
             <td class="cart_product">
               <a href="">
-                <img src="{{URL::to('/uploads/products/'.$v_content->option->image)}}" width="50" alt="" />
+                <img src="{{URL::to('/uploads/products/'.$v_content->options->image)}}" width="50" alt="" />
               </a>
             </td>
             <td class="cart_description">
@@ -62,8 +62,8 @@
               <a class="cart_quantity_delete" href="{{URL::to('/delete-to-cart'.$v_content->rowId)}}"><i class="fa fa-times"></i></a>
             </td>
           </tr>
-            
           @endforeach
+
           <section id="do_action">
             <div class="container">
               <div class="heading">
