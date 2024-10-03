@@ -24,6 +24,9 @@ Route::get('/',[HomeController::class,'index']);
 Route::get('/home',function(){
   return 'HomeController@index';
 });
+Route::post('/tim-kiem',function(){
+  return 'HomeController@index';
+});
 
 //Show category and show brand
 Route::get('/category-product/{product_id}',[CategoryProduct::class,'show_category']);
@@ -31,10 +34,10 @@ Route::get('/brand-product/{product_id}',[BrandProduct::class,'show_brand']);
 Route::get('/product-details/{product_id}',[ProductController::class,'show_product_details']);
 
 //Backend
-Route::get('/admin',[AdminController::class,'index']);
-Route::get('/dashboard',[AdminController::class,'show_dashboard']);
+Route::post('/admin',[AdminController::class,'index']);
+Route::post('/dashboard',[AdminController::class,'show_dashboard']);
 Route::get('/admin-dashboard',[AdminController::class,'dashboard']);
-Route::get('/logout',[AdminController::class,'logout']);
+Route::post('/logout',[AdminController::class,'logout']);
 
 //Category Products
 Route::get('/add-category-product',[CategoryProduct::class,'add_category_product']);
@@ -79,4 +82,5 @@ Route::get('/logout-checkout',[CheckoutController::class,'logout_checkout']);
 Route::post('/add-customer',['CheckoutController@add_customer']);
 Route::post('/login-customer',['CheckoutController@login_customer']);
 Route::get('/checkout',['CheckoutController@checkout']);
+Route::get('/payment',['CheckoutController@payment']);
 Route::post('/save-checkout-customer',['CheckoutController@save_checkout_customer']);

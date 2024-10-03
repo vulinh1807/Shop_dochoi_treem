@@ -26,6 +26,11 @@
 </head><!--/head-->
 
 <body>
+	<?php
+	echo $request->session()->get('customer_id', 'default');
+	echo $request->session()->get('customer_id', 'default');
+		?>
+
 	<header id="header"><!--header-->
 		<div class="header_top"><!--header_top-->
 			<div class="container">
@@ -92,11 +97,17 @@
 								<li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
 								<?php
 								$customer_id = Session::get('customer_id');
-								if($customer_id!=NULL)
+								$shipping_id = Session::get('shipping_id');
+								if($customer_id!=NULL && $shipping_id==NULL)
 								{
 								?>
 								<li><a href="{{URL::to('/checkout')}}"><i class="fa fa-crosshairs"></i> Checkout</a></li>
 								<?php
+								}elseif ($customer_id!=NULL && $shipping_id!=NULL) {
+									# code...
+								?>
+									<li><a href="{{URL::to('/payment')}}"><i class="fa fa-lock"></i>Payment</a></li>
+								<?php	
 								}else{
 								?>
 									<li><a href="{{URL::to('/login-checkout')}}"><i class="fa fa-lock"></i> Checkout</a></li>
@@ -127,7 +138,7 @@
 		<div class="header-bottom"><!--header-bottom-->
 			<div class="container">
 				<div class="row">
-					<div class="col-sm-9">
+					<div class="col-sm-8">
 						<div class="navbar-header">
 							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 								<span class="sr-only">Toggle navigation</span>
@@ -159,10 +170,14 @@
 							</ul>
 						</div>
 					</div>
-					<div class="col-sm-3">
-						<div class="search_box pull-right">
-							<input type="text" placeholder="Search"/>
-						</div>
+					<div class="col-sm-4">
+						<form action="{{URL::to('/tim-kiem')}}" method="POST">
+							{{ csrf_field() }}
+							<div class="search_box pull-right">
+								<input type="text" name="keyqords_submit" placeholder="Search"/>
+								<input type="submit" style="color: black;" class="btn btn-primary btn-sm" name="search_item" value="Search">
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
