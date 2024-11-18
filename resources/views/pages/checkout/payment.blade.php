@@ -115,14 +115,15 @@
       {{{{ csrf_field() }}}}
       <div class="payment-options">
           <span>
-            <label><input name="payment_option" value="ATM" type="checkbox"> Direct Bank Transfer</label>
+            <label><input name="payment_option" value="1" type="checkbox"> Direct Bank Transfer</label>
           </span>
           <span>
-            <label><input name="payment_option" value="Cash on delivery" type="checkbox"> Check Payment</label>
+            <label><input name="payment_option" value="2" type="checkbox"> Cash on delivery</label>
           </span>
           <span>
-            <label><input type="checkbox" value="Debit card" name="payment_option">Debit card</label>
+            <label><input type="checkbox" value="3" name="payment_option">Debit card</label>
           </span>
+          <input type="submit" value="Order" name="order_here" class="btn btn-primary btn-sm">
         </div>
     </form>
   </div>

@@ -81,6 +81,7 @@ Route::get('/login-checkout',[CheckoutController::class,'login_checkout']);
 Route::get('/logout-checkout',[CheckoutController::class,'logout_checkout']);
 Route::post('/add-customer',['CheckoutController@add_customer']);
 Route::post('/login-customer',['CheckoutController@login_customer']);
+Route::post('/order_here',['CheckoutController@order_here']);
 Route::get('/checkout',['CheckoutController@checkout']);
 Route::get('/payment',['CheckoutController@payment']);
 Route::post('/save-checkout-customer',['CheckoutController@save_checkout_customer']);
